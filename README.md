@@ -1,4 +1,4 @@
-该示例演示了基于 spring web 和 jdbc 的rest api。
+该示例演示了基于 spring web 和 jdbc 的 rest api。
 
 ## 应用分层（自顶向下）
 - controller 控制层，暴露rest api，接收前端请求
@@ -14,13 +14,14 @@
 - util 辅助工具类
 
 ## 关键点
-1. 前后端对错误码的约定，见`ResponseCode`
+1. 前后端对错误码的约定，见`ResponseCode`。一种说法是复用http code，但是我查看了《阿里巴巴开发手册》等资料，说http code只能表示服务的状态，不能表示业务的状态。要表示业务的状态，还是需要自定义错误码。
 2. 异常信息层层上报。repository -> service -> controller，最终展示给前端用户。本项目通过`@RestControllerAdvice`实现
 3. 分页查询
 4. 如何实现部分更新：比如一张表10个字段，前端传了一个对象过来，只改了2个字段，其余字段为空。更新时，不能将空的值写入数据库。  
    这里要么做一个空值检查；要么与前端约定，不传空值到后端，没修改的字段也一起传过来，浪费一点带宽。
+5. my.ini 需配置 `explicit_defaults_for_timestamp=OFF`，timestamp类型的字段为NULL时才会自动插入当前值 [【MySQL】explicit_defaults_for_timestamp 参数详解 - SegmentFault 思否](https://segmentfault.com/a/1190000018818020)
 
 ## 如何运行
 1. 准备一个mysql。建表语句在resources目录下
 2. 运行test目录下的测试用例，会生成一些测试数据
-3. 启动项目（MainApp），访问 [http://localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html) 查看和测试REST API
+3. 启动项目（MainApp），访问 [http://localhost:8081/swagger-ui/index.html](http://localhost:8081/swagger-ui.html) 查看和测试REST API
