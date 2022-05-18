@@ -25,3 +25,6 @@
 1. 准备一个mysql。建表语句在resources目录下
 2. 运行test目录下的测试用例，会生成一些测试数据
 3. 启动项目（MainApp），访问 [http://localhost:8081/swagger-ui/index.html](http://localhost:8081/swagger-ui.html) 查看和测试REST API
+
+## 截图
+![rest api image](assets/img.png)
